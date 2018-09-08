@@ -1,0 +1,9 @@
+PG_MODE=primary
+PG_PRIMARY_USER=postgres
+PG_PRIMARY_PASSWORD=temp#key
+PG_DATABASE=bundesligadb
+PG_USER=tempuser
+PG_PASSWORD=temp#key
+PG_ROOT_PASSWORD=temp#key
+PG_PRIMARY_PORT=5432
+
