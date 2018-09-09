@@ -2,18 +2,32 @@ version: '3'
 
 services:
   db:
-    image: postgres:10.1-alpine
+    image: postgres:10.5
+    env_file: .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: always
     ports:
       - "5432" 
-        
-  
+    
   web:
     build: .
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: python3 manage.py runserver 0.0.0.0:8899
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
-    depends_on:
+      - "8899:8899"
+    links:
       - db
+    environment:
+      DB_HOST: db:5432
+      DB_USER: tempuser
+      DB_PASSWORD: temp#key
+volumes:
+  db_data:
   

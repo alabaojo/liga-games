@@ -1,38 +1,31 @@
 from django.db import models
 
-
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-
-
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
-    player = models.ForeignKey(Player)
-
 class Team(models.Model):
-    name = models.CharField(max_length=60))
-    location = models.CharField(max_length=60))
-    stadium = models.CharField(max_length=200)
+    name = models.CharField(max_length=60)
+    location = models.CharField(max_length=60)
+    stadium = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
     
 
 class Player(models.Model):
-    name = models.CharField(max_length=60))
-    club_id = models.ForeignKey(Club)
+    name = models.CharField(max_length=60)
+    team_id = models.ForeignKey(Team, on_delete=models.PROTECT)
 
     class Meta:
-        ordering = ('club_id',)
+        ordering = ('team_id',)
+
+    def __str__(self):
+        return self.name 
     
 class Goal(models.Model):
-    score_time = models.FloatField(max_length=6))
-    scorer_id = models.ForeignKey(Player)
-    is_own_goal = models.BooleanField(default=false)
+    score_time = models.FloatField(max_length=6)
+    scorer_id = models.ForeignKey(Player, on_delete=models.PROTECT)
+    is_own_goal = models.BooleanField(default=False)
 
 class Match(models.Model):
-    home_team = models.ForeignKey(Team)
-    away_team = models.ForeignKey(Team)
-    match_date =  models.DateTimeField(default=datetime.now())
+    teams_id = models.ManyToManyField(Team)
+    match_date =  models.DateTimeField(blank = True)
     home_team_goals = models.IntegerField(default=0)  
     away_team_goals = models.IntegerField(default=0)    
