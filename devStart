@@ -1,0 +1,30 @@
+#!/bin/bash
+clear
+echo "Good morning, world."
+uname -sr
+ls /home/joal/project-py/liga-games
+docker ps 
+clear
+
+#cleanup
+echo "Deleting existing Containers."
+docker rm -f `docker ps -aq -f name=liga_games_*`
+
+#setup
+set -a
+source .env
+ls .env
+#start up containers
+docker-compose up -d --build
+
+#pgadmin4 setup
+#check if postgres is already running
+docker rm -f `docker ps -aq -f name=pgadmin*`
+
+docker run --name pgadmin4 -p 5050:5050 -d fenglc/pgadmin4
+
+#Connect to web container bash
+gnome-terminal 
+#docker-compose exec web | gnome-terminal 
+docker-compose exec db psql  -U postgres
+

@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'bundesliga.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bundesligadb',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'temp#key',
         'HOST': 'db',
