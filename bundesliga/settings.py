@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'bundesliga.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
+        'NAME': 'games',
+        'USER': 'games',
         'PASSWORD': 'temp#key',
-        'HOST': 'db',
+        'HOST': 'db', #set in docker-compose
         'PORT': 5432,
     }
 }

@@ -1,0 +1,16 @@
+== Info: Rebuilt URL to: 0/
+== Info:   Trying 0.0.0.0...
+== Info: connect to 0.0.0.0 port 80 failed: Connection refused
+== Info: Failed to connect to 0 port 80: Connection refused
+== Info: Closing connection 0
+== Info: Rebuilt URL to: :::8000/
+== Info:   Trying ::...
+== Info: Connected to :: (::1) port 8000 (#1)
+=> Send header, 71 bytes (0x47)
+0000: GET / HTTP/1.1
+0010: Host: :::8000
+001f: User-Agent: curl/7.47.0
+0038: Accept: */*
+0045: 
+== Info: Recv failure: Connection reset by peer
+== Info: Closing connection 1

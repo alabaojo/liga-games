@@ -1,14 +1,15 @@
 #!/bin/bash
 clear
-echo "Good morning, world."
+echo "shutdown running containers."
+docker-compose down
+#Timeout solution (with -t 5)
 uname -sr
-ls /home/joal/project-py/liga-games
-docker ps 
-clear
+read -rsp $'Press any key or wait 5 seconds to continue...\n' -n 1 -t 5;
 
 #cleanup
 echo "Deleting existing Containers."
-docker rm -f `docker ps -aq -f name=liga_games_*`
+docker rm -f -s `docker ps -aq -f name=liga_games_*`
+
 
 #setup
 set -a
