@@ -7,7 +7,7 @@ from django.utils import timezone
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=60,unique=True)
+    name = models.CharField(max_length=30, unique=True)
     alias = models.CharField(max_length=60)
     
 
@@ -38,11 +38,6 @@ class Season(models.Model):
     matches = models.ManyToManyField(Match) 
 
 
-class ProductQueryset(models.query.QuerySet):
-    def active(self):
-        return self.filter(active=True)
 
-    def featured(self):
-        return self.filter(featured=True)
 
 

@@ -46,5 +46,5 @@ def season(request):
 def index(request):
     teams = service_front.teams_info()
     matches = service_front.teams_info()
-    context = {"brand": "Ford", "model": "Mustang", "year": 1964 }
+    context = {"teams": teams, "matches": "Mustang", "year": 1964 }
     return render(request, 'games/index.html', context)
