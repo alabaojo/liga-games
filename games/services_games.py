@@ -4,7 +4,7 @@ from games.models import Team, Match, Result, Season
 # /getmatchdata/Identifier/Season/GroupOrderId
 import requests
 
-def fetch_all_team_in():
+def fetch_all_team():
     league = 'bl1/'
     season = '2016'
     url_endpoint= URL_TEAM_ALL

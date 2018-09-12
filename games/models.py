@@ -1,42 +1,39 @@
 from django.db import models
 from django.utils import timezone
-#from django.db.models import Model, Manager
 
-#from django.db.models import CharField, Model
+from games.constants import DEFAULT_LEAGUE
 
+
+class Result(models.Model):
+    result_order = models.IntegerField()
+    point_team1 = models.IntegerField()
+    point_team2 = models.IntegerField()
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=30, unique=True)
-    alias = models.CharField(max_length=60)
-    
-
-    def __str__(self):
-        return self.name    
-
-class Result(models.Model):
-    home_goal = models.IntegerField()
-    away_goal = models.IntegerField()
-
+    team_order = models.IntegerField()
+    name = models.CharField(max_length=40, unique=True)
+    alias = models.CharField(max_length=20)
 
 
 class Match(models.Model):
-    teams = models.ManyToManyField(Team)
-    match_order = models.IntegerField(default=0) 
-    result = models.ForeignKey(Result, on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ('match_order',)
+    match_order = models.IntegerField()
+    team_id = models.ManyToManyField(Team)
+    is_home_match = models.BooleanField(default=False)
+    result_id = models.ForeignKey(Result, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.match_order   
-     
+        return self.name
+
 
 class Season(models.Model):
-    start_date = models.DateTimeField(default= timezone.now(), blank=True)
-    end_date = models.DateTimeField( default = timezone.now())
-    matches = models.ManyToManyField(Match) 
+    season_code = models.DateTimeField(blank=True)
+    matches = models.ManyToManyField(Match)
 
+
+class League(models.Model):
+    league_code = models.CharField( max_length=3)
+    match_id = models.ManyToManyField(Match)
 
 
 

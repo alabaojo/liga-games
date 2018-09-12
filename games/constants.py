@@ -15,3 +15,5 @@ URL_UPDATE = 'https://www.openligadb.de/api/getlastchangedate/bl1/2016/8' #for  
 
 #all team list
 URL_TEAM_ALL = 'https://www.openligadb.de/api/getavailableteams/'
+
+DEFAULT_LEAGUE = 'bl1'

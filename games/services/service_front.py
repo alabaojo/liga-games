@@ -6,5 +6,18 @@ import requests
 
 
 def teams_info():
-    teams = [t for t in Team.objects.all()]
+    teams = [t['name'] for t in Team.objects.values('name')]
     return teams
+
+def fetch_api_team():
+    league = 'bl1/'
+    season = '2016'
+    url_endpoint = URL_TEAM_ALL
+    url = url_endpoint + league + season
+    resp = requests.get(url)
+    teams_json = resp.json()
+    for team in teams_json:
+        Team(order=team['TeamId'], name=team['TeamName'],
+             alias=team['ShortName']).save()
+    return
+

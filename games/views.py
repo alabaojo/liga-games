@@ -7,7 +7,7 @@ from games.models import Team, Match, Result, Season
 import games.services_games as services_games
 
 import requests
-from games.services import service_front
+from games.services import service_front, services_back
 
 
 
@@ -44,7 +44,9 @@ def season(request):
     return render(request, 'games/index.html', context)
 
 def index(request):
+    #services_back.fetch_team()
     teams = service_front.teams_info()
     matches = service_front.teams_info()
-    context = {"teams": teams, "matches": "Mustang", "year": 1964 }
+   # teams = {'order': 2, 'name': 'i dont know', 'alias':'oh i know'}
+    context = {"teams": teams, "matches": "Mustang", "year": 1964}
     return render(request, 'games/index.html', context)

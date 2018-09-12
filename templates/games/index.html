@@ -3,24 +3,24 @@
 
 {% block content %}
   <h1>Local Library Home</h1>
-  <p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>
-        <ul>
+  <p> <em>Teams</em>!</p>
+    <ol>
         {% for item in teams %}
         <li>{{ item }}</li>
         {% endfor %}
-    </ul>
+    </ol>
 {% endblock %}
 
 {% block sidebar %}
-    <h1>index yyyTemplate</h1>
+    <h1>Teams</h1>
     <h1>{{ team_name }}</h1>
     <h1>{{ num_authors }}</h1>
-    <p>Here are the items you've ordered:</p>
+    <p>Here are the matches:</p>
 
-    <ul>
+    <ol>
         {% for item in teams %}
         <li>{{ item }}</li>
         {% endfor %}
-    </ul>
+    </ol>
     <a href="{% url 'season' %}">Season</a>.
 {% endblock %}
