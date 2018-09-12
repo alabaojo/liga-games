@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>Django Templates Tutorial</title>
+</head>
+<body>
+    <h1>home Template</h1>
+    <ul>
+        {% for choice in context.all %}
+           <li>{{ choice.choice_text }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'games',
         'USER': 'games',
         'PASSWORD': 'temp#key',
-        'HOST': 'db', #set in docker-compose
+        'HOST': 'db', 
         'PORT': 5432,
     }
 }

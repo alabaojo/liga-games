@@ -4,17 +4,14 @@ echo "shutdown running containers."
 docker-compose down
 #Timeout solution (with -t 5)
 uname -sr
-read -rsp $'Press any key or wait 5 seconds to continue...\n' -n 1 -t 5;
 
 #cleanup
 echo "Deleting existing Containers."
-docker rm -f -s `docker ps -aq -f name=liga_games_*`
+docker rm -f `docker ps -aq -f name=liga_games_*`
+sudo pkill -u postgres #kill my local postgres to free the port
 
+read -rsp $'Press any key or wait 5 seconds to continue...\n' -n 1 -t 5;
 
-#setup
-set -a
-source .env
-ls .env
 #start up containers
 docker-compose up -d --build
 

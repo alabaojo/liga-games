@@ -1,33 +1,48 @@
 from django.db import models
+from django.utils import timezone
+#from django.db.models import Model, Manager
 
-from django.db.models import CharField, Model
+#from django.db.models import CharField, Model
+
+
 
 class Team(models.Model):
-    name = models.CharField(max_length=60)
-    location = models.CharField(max_length=60)
-    stadium = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.name
+    name = models.CharField(max_length=60,unique=True)
+    alias = models.CharField(max_length=60)
     
 
-class Fixture(models.Model):
+    def __str__(self):
+        return self.name    
+
+class Result(models.Model):
+    home_goal = models.IntegerField()
+    away_goal = models.IntegerField()
+
+
+
+class Match(models.Model):
+    teams = models.ManyToManyField(Team)
     match_order = models.IntegerField(default=0) 
-    match_date =  models.DateTimeField(blank = True)
-    #home_team = models.ForeignKey(Team, on_delete=models.PROTECT)
-    #away_team = models.ForeignKey(Team, on_delete=models.PROTECT)
-    result = models.IntegerField(default=0)  
-    team_id = models.ForeignKey(Team, on_delete=models.PROTECT)
+    result = models.ForeignKey(Result, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ('team_id',)
+        ordering = ('match_order',)
 
     def __str__(self):
-        return self.match_order 
-    
+        return self.match_order   
+     
+
 class Season(models.Model):
-    start_date = models.DateTimeField()
-    start_date = models.DateTimeField()
-    team_id = models.ForeignKey(Team, on_delete=models.PROTECT)
+    start_date = models.DateTimeField(default= timezone.now(), blank=True)
+    end_date = models.DateTimeField( default = timezone.now())
+    matches = models.ManyToManyField(Match) 
+
+
+class ProductQueryset(models.query.QuerySet):
+    def active(self):
+        return self.filter(active=True)
+
+    def featured(self):
+        return self.filter(featured=True)
 
 
