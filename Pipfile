@@ -11,7 +11,7 @@ python_version = "3.5"
 
 [packages]
 "psycopg2" = "*"
-Django = "==2.1"
+Django = "==2.1.11"
 request = "*"
 pylint-django = "*"
 requests = "*"
